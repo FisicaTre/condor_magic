@@ -1,0 +1,19 @@
+#!/usr/bin/env condor_submit
+
+universe = vanilla
+
+executable = python3
+
+arguments = " --data $(data_file) --id $(id) --logs $(log_path) "
+
+request_disk = 4000
+request_cpus = 1
+request_memory = 1000
+# periodic_remove = (time() - EnteredCurrentStatus) > 3600
+
+output = $(log_path)/out.$(Process).$(GPS)
+error = $(log_path)/err.$(Process).$(GPS)
+
+notification = never
+getenv = True
+queue 1
